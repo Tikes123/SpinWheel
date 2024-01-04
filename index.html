@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Stumble Guys</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--CSS LINK-->
+    <link rel="stylesheet" href="main.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="bootstrap-5.0.2-dist/css/bootstrap.min.css"
+      type="text/css"
+    />
+
+    <!--CSS LINK END-->
+
+    <!--Playable Ads Require-->
+    <meta name="ad.orientation" content="portrait" />
+    <meta name="ad.size" content="width=320,height=480" />
+    
+    <script type="text/javascript">
+      var clickTag = "https://apps.apple.com/us/app/mods-gems-for-stumble-guys/id6443702843"; 
+    </script>
+
+    <!--Requirement END-->
+   
+    <!--SCRIPT LINK-->
+    <script type="text/javascript" src="Winwheel.js"></script>
+
+    <!--SCRIPT LINK END-->
+    <style>
+      .h {
+        overflow: hidden;
+      }
+      .winn {
+        margin-top: 55px;
+        width: auto;
+        height: 290px;
+      }
+      .win_txt {
+        width: 190px;
+      }
+      .pdt {
+        padding-top: 120px;
+      }
+      .mt_img{
+        margin-top: -30px;
+      }
+      .w{
+        max-width: 320px !important;
+        max-height: 480px !important;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body class="bg">
+    <div class="mx-auto body_cover w" id="view">
+      <div class="container-fluid m-0 p-0 w">
+        <div class="header">
+          <div class="">
+            <div class="prize">
+              <div class="align d-flex my-auto">
+                <span class="counter_g my-auto" id="gem">0</span
+                ><img src="resources/gem.png" alt="Gems" class="token_img" />
+              </div>
+              <div class="align d-flex my-auto">
+                <span class="counter_c my-auto" id="coin">0</span
+                ><img
+                  src="resources/coin.png"
+                  alt="Coins"
+                  class="token_img"
+                  style="margin-right: 9px"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Flying Token-->
+        <!-- <div id="fg" style="display: none;"><img src="resources/flygem.png" alt="Coins" id="fgem" class="token_img" /></div>
+      <div id="fc" style="display: none;"><img src="resources/flycoin.png" alt="Coins" id="fcoin" class="token_img" /></div> -->
+        <!--Flying Token End-->
+        <div class="container">
+          <span class="heading d-flex" style="height: 80px"
+            ><img src="resources/text.svg" id="wintxt" class="win_txt mx-auto"
+          style="margin-top: -20px;"/></span>
+          <div class="canva_box">
+            <span class="arrow"
+              ><img src="resources/v.svg" class="dial"
+            /></span>
+            <div class="cover">
+              <div class="contain" id="stumble">
+                <canvas
+                  id="canvas"
+                  width="692"
+                  height="692"
+                  data-responsiveMinWidth="180"
+                  data-responsiveScaleHeight="true"
+                >
+                  <p style="color: white" align="center">
+                    Sorry, your browser doesn't support canvas. Please try
+                    another.
+                  </p>
+                </canvas>
+              </div>
+            </div>
+          </div>
+          <div class="power_controls">
+            <button
+              id="spin_button"
+              class="spn_btn spin pulse_spin d-flex"
+              onClick="startSpin();"
+            >
+              <span class="text-align-center text_btn"
+                >Spin</br><span class="spn" id="round">x3</span></span
+              >
+            </button>
+          </div>
+
+          <!-- Modal Coins-->
+          <div class="modal h" id="coinsModal" tabindex="-1" onclick="Modal()">
+            <div class="modal-dialog modal_padding">
+              <div class="modal-content modal_bg bg-text">
+                <div
+                  class="modal-header"
+                  style="border: none"
+                  style="border: none"
+                >
+                  <h5 class="modal-title pd_t mx-auto" id="gemModalLabel">
+                    <img src="resources/wow.png" alt="Wow" class="wow" />
+                  </h5>
+                </div>
+                <div class="modal-body">
+                  <div class="modal_blur">
+                    <div class="img_box d-flex mx-auto">
+                      <!-- <div id="m_fc" style="display: none;"><img src="resources/big.svg" alt="Coins" id="m_fcoin" class="token_img" /></div> -->
+                      <img
+                        src="resources/Tokens.png"
+                        alt="Treasure"
+                        id="mod_img"
+                        class="modal_img won d-flex"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="modal_blur1">
+                    <h3 class="pulse_text d-flex justify-content-center">
+                      x1000
+                    </h3>
+                  </div>
+                </div>
+                <div class="modal-footer" style="border: none"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal Gems-->
+          <div class="modal h" id="gemModal" tabindex="-1" onclick="Modal()">
+            <div class="modal-dialog modal_padding">
+              <div class="modal-content modal_bg bg-text">
+                <div
+                  class="modal-header"
+                  style="border: none"
+                  style="border: none"
+                >
+                  <h5 class="modal-title pd_t mx-auto" id="gemModalLabel">
+                    <img src="resources/wow.png" alt="Wow" class="wow" />
+                  </h5>
+                </div>
+                <div class="modal-body">
+                  <div class="modal_blur">
+                    <div class="img_box d-flex mx-auto">
+                      <!-- <div id="m_fg" style="display: none;"><img src="resources/gemss.png" alt="Coins" id="m_fgem" class="token_img" /></div> -->
+                      <img
+                        src="resources/Gems.png"
+                        alt="Gem Chest"
+                        id="mod_img"
+                        class="modal_img won d-flex"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="modal_blur1">
+                    <h3 class="pulse_text d-flex justify-content-center">
+                      x10000
+                    </h3>
+                  </div>
+                </div>
+                <div class="modal-footer" style="border: none"></div>
+              </div>
+            </div>
+          </div>
+          <!-- Modal BattlePass-->
+          <div class="modal h" id="battleModal" tabindex="-1">
+            <div class="modal-dialog modal_padding">
+              <div class="modal-content modal_bg">
+                <div class="modal-header" style="border: none">
+                  <h5 class="modal-title mx-auto" id="battleModalLabel">
+                    <img src="resources/wow.png" alt="Wow" class="wow" />
+                  </h5>
+                </div>
+                <div class="modal-body">
+                  <div class="d-flex mx-auto">
+                    <!-- <img src="resources/battlepass.png" alt="Treasure" id="mod_img" class="modal_img won d-flex mx-auto"> -->
+                  </div>
+                </div>
+                <div class="modal-footer" style="border: none">
+                  <button
+                    type="button"
+                    class="btn btn-guys"
+                    id=""
+                    onclick="Modal()"
+                  >
+                    <span class="get">Get</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Modal Emote-->
+          <div class="modal h" id="emoteModal" tabindex="-1">
+            <div class="modal-dialog modal_padding">
+              <div class="modal-content modal_bg">
+                <div class="modal-header" style="border: none">
+                  <h5 class="modal-title mx-auto" id="emoteModalLabel">
+                    <img src="resources/wow.png" alt="Wow" class="wow" />
+                  </h5>
+                </div>
+                <div class="modal-body">
+                  <div class="img_box d-flex mx-auto">
+                    <!-- <img src="resources/emote.svg" alt="Emote" id="mod_img" class="modal_img won d-flex mx-auto"> -->
+                  </div>
+                </div>
+                <div class="modal-footer" style="border: none">
+                  <button
+                    type="button"
+                    class="btn btn-guys"
+                    id=""
+                    onclick="Modal()"
+                  >
+                    <span class="get">Get</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Modal Jackpot-->
+          <div class="modal h" id="jackpotModal" tabindex="-1">
+            <div class="modal-dialog modal_padding">
+              <div class="modal-content modal_bg1">
+                <div class="modal-header" style="border: none">
+                  <h5
+                    class="modal-title mx-auto"
+                    id="jackpotModalLabel"
+                    style="padding-top: 48px"
+                  >
+                    <img src="resources/group.png" alt="Wow" class="wow" />
+                  </h5>
+                </div>
+                <div class="modal-body">
+                  <div class="img_box d-flex mx-auto">
+                    <img
+                      src="resources/chestclose.png"
+                      alt="Chest Close"
+                      id="mod_img"
+                      class="modal_img mt_img won_jackimg d-flex mx-auto"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="modal-footer"
+                  style="border: none; margin-bottom: 10px;"
+                >
+                  <a
+                    class="btn btn-guys"
+                    href="javascript:window.open(window.clickTag)"
+                     ><span class="get">Get</span></a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Modal Legend-->
+          <div class="modal h" id="legendModal" tabindex="-1">
+            <div class="modal-dialog modal_padding">
+              <div class="modal-content modal_bg">
+                <div class="modal-header" style="border: none">
+                  <h5 class="modal-title mx-auto" id="legendModalLabel">
+                    <img src="resources/wow.png" alt="Wow" class="wow" />
+                  </h5>
+                </div>
+                <div class="modal-body">
+                  <div class="img_box d-flex mx-auto">
+                    <!-- <img src="resources/legend.png" alt="Legendary Skin" id="mod_img" class="modal_img skin d-flex mx-auto"> -->
+                  </div>
+                </div>
+                <div class="modal-footer" style="border: none">
+                  <button
+                    type="button"
+                    class="btn btn-guys"
+                    id=""
+                    onclick="Modal()"
+                  >
+                    <span class="get">Get</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Modal Epic-->
+          <div class="modal h" id="epicModal" tabindex="-1">
+            <div class="modal-dialog modal_padding">
+              <div class="modal-content modal_bg">
+                <div class="modal-header" style="border: none">
+                  <h5 class="modal-title mx-auto" id="epicModalLabel">
+                    <img src="resources/wow.png" alt="Wow" class="wow" />
+                  </h5>
+                </div>
+                <div class="modal-body">
+                  <div class="img_box d-flex mx-auto">
+                    <!-- <img src="resources/epic.png" alt="Epic Skin" id="mod_img" class="modal_img skin epic d-flex mx-auto"> -->
+                  </div>
+                </div>
+                <div class="modal-footer" style="border: none">
+                  <button
+                    type="button"
+                    class="btn btn-guys"
+                    id=""
+                    onclick="Modal()"
+                  >
+                    <span class="get">Get</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Modal Special-->
+          <div class="modal h" id="specialModal" tabindex="-1">
+            <div class="modal-dialog modal_padding">
+              <div class="modal-content modal_bg">
+                <div class="modal-header" style="border: none">
+                  <h5 class="modal-title mx-auto" id="specialModalLabel">
+                    <img
+                      src="resources/specialskin.png"
+                      alt="Wow"
+                      class="wow"
+                    />
+                  </h5>
+                </div>
+                <div class="modal-body">
+                  <div class="img_box d-flex mx-auto">
+                    <!-- <img src="resources/specil.png" alt="Special Skin" id="mod_img" class="modal_img skin special d-flex mx-auto"> -->
+                  </div>
+                </div>
+                <div class="modal-footer" style="border: none">
+                  <button
+                    type="button"
+                    class="btn btn-guys"
+                    id=""
+                    onclick="Modal()"
+                  >
+                    <span class="get">Get</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--Modal End-->
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Create new wheel object specifying the parameters at creation time.
+      let theWheel = new Winwheel({
+        numSegments: 12, // Specify number of segments.
+        innerRadius: 200, // Set inner radius so wheel fits inside the background.
+        drawMode: "image", // drawMode must be set to image.
+        drawText: true, // Need to set this true if want code-drawn text on image wheels.
+        textFontSize: 16, // Set text options as desired.
+        textOrientation: "curved",
+        textDirection: "reversed",
+        textAlignment: "",
+        textMargin: 90,
+        textFontFamily: "monospace",
+        textStrokeStyle: "black",
+        textLineWidth: 3,
+        textFillStyle: "white",
+        responsive: true,
+        // Define segments.
+        segments: [
+          { jack: "Jackpot" },
+          { coin: "150" },
+          { gem: "500" },
+          { pass: "Battlepass ticket" },
+          { gem: "2500" },
+          { emo: "Emote" },
+          { legend: "Legendary skin" },
+          { gems: "10000" },
+          { coin: "35" },
+          { coins: "1000" },
+          { epic: "Epic Skin" },
+          { special: "Special Skin" },
+        ],
+        // Specify the animation to use.
+
+        animation: {
+          type: "spinToStop",
+          duration: 3, // Duration in seconds.
+          spins: 12, // Number of complete spins.
+          callbackFinished: alertPrize,
+          callbackSound: playSound, // Function to call when the tick sound is to be triggered.
+          soundTrigger: "pin", // Specify pins are to trigger the sound, the other option is 'segment'.
+        },
+        // Turn pins on.
+        pins: {
+          number: 12,
+          responsive: true,
+          fillStyle: "#ffffff00",
+          outerRadius: 0,
+        },
+      });
+
+      // Loads the tick audio sound in to an audio object.
+      let audio = new Audio("tick.mp3");
+
+      // This function is called when the sound is to be played.
+      function playSound() {
+        // Stop and rewind the sound if it already happens to be playing.
+        audio.pause();
+        audio.currentTime = 0;
+
+        // Play the sound.
+        audio.play();
+      }
+
+      // Create new image object in memory.
+      let loadedImg = new Image();
+
+      // Create callback to execute once the image has finished loading.
+      loadedImg.onload = function () {
+        theWheel.wheelImage = loadedImg; // Make wheelImage equal the loaded image object.
+        loadedImg.width = 702;
+        loadedImg.height = 702;
+        theWheel.draw(); // Also call draw function to render the wheel.
+      };
+
+      // Set the image source, once complete this will trigger the onLoad callback (above).
+      loadedImg.src = "resources/Frame 88.jpg";
+
+      // Vars used by the code in this page to do power controls.
+      let wheelPower = 0;
+      let wheelSpinning = false;
+      let spinCount = 0;
+      // -------------------------------------------------------
+      // Function to handle the onClick on the power buttons.
+      // -------------------------------------------------------
+      function powerSelected(powerLevel) {
+        // Ensure that power can't be changed while wheel is spinning.
+        if (wheelSpinning == false) {
+          // Reset all to grey incase this is not the first time the user has selected the power.
+          document.getElementById("pw1").className = "";
+          document.getElementById("pw2").className = "";
+          document.getElementById("pw3").className = "";
+
+          // Now light up all cells below-and-including the one selected by changing the class.
+          if (powerLevel >= 1) {
+            document.getElementById("pw1").className = "pw1";
+          }
+
+          if (powerLevel >= 2) {
+            document.getElementById("pw2").className = "pw2";
+          }
+
+          if (powerLevel >= 3) {
+            document.getElementById("pw3").className = "pw3";
+          }
+
+          // Set wheelPower var used when spin button is clicked.
+          wheelPower = powerLevel;
+        }
+      }
+
+      document.querySelector(".spin").addEventListener("click", spin_button);
+      var out = document.getElementById("round");
+      // -------------------------------------------------------
+      // Click handler for spin button.
+      // -------------------------------------------------------
+      function startSpin() {
+        
+        document.getElementById("spin_button").classList.remove("pulse_spin");
+
+        if (spinCount > 2) {
+          alert("No more spins.");
+          return false;
+        }
+        switch (spinCount) {
+          case 0:
+            out.innerHTML = "x2";
+            document.getElementById("wintxt").style.display = "none";
+
+            var element = document.getElementById("stumble");
+            element.classList.remove("contain");
+            element.classList.add("powerspin1");
+
+            var puls = document.getElementById("spin_button");  
+            puls.classList.remove("pulse_spin");
+
+
+            var non = document.getElementById("spin_button");  
+            non.classList.add("disable");
+            setTimeout(function() {
+              non.classList.remove("disable");
+              document.getElementById("gemModal").style.display = "block";
+            }, 2000);
+
+            
+            setTimeout(() => {
+              var gem = 8999;
+              var obj1 = document.getElementById("gem");
+              var timerMy = setInterval(function () {
+                gem++;
+                obj1.innerHTML = gem;
+                console.log(gem);
+                if (gem == 10000) {
+                  clearInterval(timerMy);
+                }
+              }, 0);
+            }, 2000);
+             
+
+            // setTimeout(()=> {
+            //   var timerMy = setInterval(function(){
+            //   document.getElementById("gem").innerHTML = "10000";
+            // }
+            // ,4200);
+
+            document.getElementById("coinsModal").style.display = "none";
+            document.getElementById("jackpotModal").style.display = "none";
+            document.getElementById("emoteModal").style.display = "none";
+            document.getElementById("battleModal").style.display = "none";
+            document.getElementById("legendModal").style.display = "none";
+            document.getElementById("epicModal").style.display = "none";
+            document.getElementById("specialModal").style.display = "none";
+            break;
+
+          case 1:
+            out.innerHTML = "x1";
+            document.getElementById("wintxt").style.display = "none";
+
+            var element = document.getElementById("stumble");
+            element.classList.remove("powerspin1");
+            element.classList.add("powerspin2");
+
+            var puls = document.getElementById("spin_button");  
+            puls.classList.remove("pulse_spin");
+
+            var non = document.getElementById("spin_button");  
+            non.classList.add("disable");
+            setTimeout(function() {
+              non.classList.remove("disable");
+            document.getElementById("coinsModal").style.display = "block";
+            }, 2000);
+
+            setTimeout(() => {
+              var cnt = 099;
+              var obj1 = document.getElementById("coin");
+              // document.getElementById("coin").innerHTML = "1000";
+              var timerMy = setInterval(function () {
+                cnt++;
+                obj1.innerHTML = cnt;
+                console.log(cnt);
+                if (cnt == 1000) {
+                  clearInterval(timerMy);
+                }
+              }, 0);
+            }, 2000);
+
+
+            document.getElementById("gemModal").style.display = "none";
+            document.getElementById("jackpotModal").style.display = "none";
+            document.getElementById("emoteModal").style.display = "none";
+            document.getElementById("battleModal").style.display = "none";
+            document.getElementById("legendModal").style.display = "none";
+            document.getElementById("epicModal").style.display = "none";
+            document.getElementById("specialModal").style.display = "none";
+            break;
+
+          default:
+            out.innerHTML = "";
+            document.getElementById("wintxt").style.display = "none";
+            document.getElementById("jackpotModal").style.display = "block";
+
+            var element = document.getElementById("stumble");
+            element.classList.remove("powerspin2");
+            element.classList.add("powerspin3");
+
+            var puls = document.getElementById("spin_button");  
+            puls.classList.remove("pulse_spin");
+
+            var non = document.getElementById("spin_button");  
+            non.classList.add("disable");
+            setTimeout(function() {
+              non.classList.remove("disable");
+              document.getElementById("jackpotModal").style.display = "block";
+            }, 2000);
+
+            document.getElementById("coinsModal").style.display = "none";
+            document.getElementById("gemModal").style.display = "none";
+            document.getElementById("emoteModal").style.display = "none";
+            document.getElementById("battleModal").style.display = "none";
+            document.getElementById("legendModal").style.display = "none";
+            document.getElementById("epicModal").style.display = "none";
+            document.getElementById("specialModal").style.display = "none";
+            break;
+        }
+
+        // Ensure that spinning can't be clicked again while already running.
+        if (wheelSpinning == false) {
+          // Based on the power level selected adjust the number of spins for the wheel, the more times is has
+          // to rotate with the duration of the animation the quicker the wheel spins.
+
+          // Disable the spin button so can't click again while wheel is spinning.
+          document.getElementById("spin_button").className =
+            "spn_btn spin d-flex disable";
+
+          // Begin the spin animation by calling startAnimation on the wheel object.
+
+          // theWheel.startAnimation(); For Random Spin
+
+          // Set to true so that power can't be changed and spin button re-enabled during
+          // the current animation. The user will have to reset before spinning again.
+          wheelSpinning = false;
+        }
+        spinCount++;
+      }
+        
+
+      // -------------------------------------------------------
+      // Function for reset button.
+      // -------------------------------------------------------
+      function resetWheel() {
+        theWheel.stopAnimation(false); // Stop the animation, false as param so does not call callback function.
+        theWheel.rotationAngle = 0; // Re-set the wheel angle to 0 degrees.
+        theWheel.draw(); // Call draw to render changes to the wheel.
+
+        document.getElementById("pw1").className = ""; // Remove all colours from the power level indicators.
+        document.getElementById("pw2").className = "";
+        document.getElementById("pw3").className = "";
+
+        wheelSpinning = false; // Reset to false to power buttons and spin can be clicked again.
+      }
+
+      // -------------------------------------------------------
+      // Called when the spin animation has finished by the callback feature of the wheel because I specified callback in the parameters.
+      // note the indicated segment is passed in as a parmeter as 99% of the time you will want to know this to inform the user of their prize.
+      // -------------------------------------------------------
+      function alertPrize(indicatedSegment) {
+        // Do basic alert of the segment text. You would probably want to do something more interesting with this information.
+        // if (indicatedSegment.coin) {
+        //   document.getElementById("coin").innerText = indicatedSegment.coin;
+        //   document.getElementById("fc").style.display = "block";
+        //   document.getElementById("fg").style.display = "none";
+        // }
+        // if (indicatedSegment.coins) {
+        //   document.getElementById("coin").innerText = indicatedSegment.coins;
+        //   // document.getElementById("coinsModal").style.display = "block";
+        //   document.getElementById("fc").style.display = "block";
+        //   document.getElementById("fg").style.display = "none";
+        //   document.getElementById("m_fc").style.display = "block";
+        //   document.getElementById("m_fg").style.display = "none";
+        // }
+        // if (indicatedSegment.gem) {
+        //   document.getElementById("gem").innerText = indicatedSegment.gem;
+        //   document.getElementById("fg").style.display = "block";
+        //   document.getElementById("fc").style.display = "none";
+        // }
+        // if (indicatedSegment.gems) {
+        //   document.getElementById("gem").innerText = indicatedSegment.gems;
+        //   // document.getElementById("gemModal").style.display = "block";
+        //   document.getElementById("fg").style.display = "block";
+        //   document.getElementById("fc").style.display = "none";
+        //   document.getElementById("m_fg").style.display = "block";
+        //   document.getElementById("m_fc").style.display = "none";
+        // }
+        // if(indicatedSegment.jack){
+        //   // document.getElementById("jackpotModal").style.display = "block";
+        //   document.getElementById("fc").style.display = "none";
+        //   document.getElementById("fg").style.display = "none";
+        // }
+        // if(indicatedSegment.emo){
+        //   // document.getElementById("emoteModal").style.display = "block";
+        //   document.getElementById("fc").style.display = "none";
+        //   document.getElementById("fg").style.display = "none";
+        // }
+        // if(indicatedSegment.pass){
+        //   // document.getElementById("battleModal").style.display = "block";
+        //   document.getElementById("fc").style.display = "none";
+        //   document.getElementById("fg").style.display = "none";
+        // }
+        // if(indicatedSegment.legend){
+        //   // document.getElementById("legendModal").style.display = "block";
+        //   document.getElementById("fc").style.display = "none";
+        //   document.getElementById("fg").style.display = "none";
+        // }
+        // if(indicatedSegment.epic){
+        //   // document.getElementById("epicModal").style.display = "block";
+        //   document.getElementById("fc").style.display = "none";
+        //   document.getElementById("fg").style.display = "none";
+        // }
+        // if(indicatedSegment.special){
+        //   // document.getElementById("specialModal").style.display = "block";
+        //   document.getElementById("fc").style.display = "none";
+        //   document.getElementById("fg").style.display = "none";
+        // }
+      }
+    </script>
+
+    <script>
+      function Modal() {
+
+        var puls = document.getElementById("spin_button"); 
+        setTimeout(function() {
+            puls.classList.add("pulse_spin");
+            }, 1500);
+          
+            var non = document.getElementById("coinsModal");  
+            non.classList.add("disable");
+            setTimeout(function() {
+              non.classList.remove("disable");
+              document.getElementById("coinsModal").style.display = "none";
+            }, 1500);
+
+            var nong = document.getElementById("gemModal");  
+            nong.classList.add("disable");
+            setTimeout(function() {
+              nong.classList.remove("disable");
+              document.getElementById("gemModal").style.display = "none";
+            }, 1500);  
+
+        document.getElementById("wintxt").style.display = "block";
+        document.getElementById("emoteModal").style.display = "none";
+        document.getElementById("battleModal").style.display = "none";
+        document.getElementById("legendModal").style.display = "none";
+        document.getElementById("epicModal").style.display = "none";
+        document.getElementById("specialModal").style.display = "none";
+        // document.getElementById("mod_img").className = "frame";
+        
+      }
+    </script>
+
+  </body>
+</html>
